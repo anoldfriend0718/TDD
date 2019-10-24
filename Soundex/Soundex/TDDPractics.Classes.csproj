@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <AssemblyName>Soundex</AssemblyName>
-    <RootNamespace>Soundex</RootNamespace>
+    <AssemblyName>TDDPractices.Classes</AssemblyName>
+    <RootNamespace>TDDPractices.Classes</RootNamespace>
   </PropertyGroup>
 
 </Project>

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Soundex", "Soundex\Soundex.csproj", "{EFFCB95C-1CB2-4B7A-AA10-3B46B320EBD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TDDPractics.Classes", "Soundex\TDDPractics.Classes.csproj", "{EFFCB95C-1CB2-4B7A-AA10-3B46B320EBD6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sounder.Tests", "Sounder.Tests\Sounder.Tests.csproj", "{C27CA3C1-EBA8-41EC-9BBB-7449AAFDF33F}"
 EndProject
