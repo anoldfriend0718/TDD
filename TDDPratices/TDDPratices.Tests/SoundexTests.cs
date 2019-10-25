@@ -90,6 +90,13 @@ namespace TDDPractices.Tests
             var actual = _soundex.Encode("I#ag");
             Assert.AreEqual("I200", actual);
         }
+
+        [TestMethod]
+        public void HeadShouldBeUpperCase()
+        {
+            var actual = _soundex.Encode("i");
+            Assert.AreEqual("I000", actual);
+        }
     }
 
 
