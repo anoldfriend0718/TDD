@@ -4,7 +4,7 @@
     {
         public string Encode(string word)
         {
-            throw new System.NotImplementedException();
+            return word.Substring(0, 1);
         }
     }
 }
