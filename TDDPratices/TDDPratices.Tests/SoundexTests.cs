@@ -8,7 +8,11 @@ namespace TDDPractices.Tests
         [TestMethod]
         public void ShouldRetainFirstLetter()
         {
-            //Soundex soundex
+            var soundex = new Soundex();
+            var actual = soundex.Encode("A");
+            Assert.AreEqual("A",actual);
         }
     }
+
+
 }
