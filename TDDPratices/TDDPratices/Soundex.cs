@@ -8,6 +8,15 @@ namespace TDDPractices
     public class Soundex
     {
         private readonly int _maxCodeLength=4;
+        private readonly IDictionary<char, int> _consonantDigitMap = new Dictionary<char, int>()
+        {
+            { 'b',1},{'f',1},{'p',1},{'v',1},
+            { 'c',2},{'g',2},{'j',2},{'k',2},{'q',2},{'s',2},{'x',2},{'z',2},
+            { 'd',3},{'t',3},
+            { 'l',4},
+            { 'm',5},{'n',5},
+            { 'r',6}
+        };
 
         public string Encode(string word)
         {
@@ -40,10 +49,7 @@ namespace TDDPractices
             return String.Concat(word,zeros);
         }
 
-        private readonly IDictionary<char,int> _consonantDigitMap=new Dictionary<char, int>()
-        {
-            { 'b',1}
-        };
+
 
         private string ReplaceConsonantWithDigits(string tails)
         {
