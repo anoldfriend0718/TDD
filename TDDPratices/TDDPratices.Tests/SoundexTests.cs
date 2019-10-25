@@ -26,7 +26,13 @@ namespace TDDPractices.Tests
             var actual = _soundex.Encode("I");
             Assert.AreEqual(4,actual.Length);
             Assert.AreEqual("I000", actual);
+        }
 
+        [TestMethod]
+        public void ShouldUseDigitsInsteadOfConsonant()
+        {
+            var actual = _soundex.Encode("Ib");
+            Assert.AreEqual("A100",actual);
         }
     }
 
