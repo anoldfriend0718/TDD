@@ -94,17 +94,22 @@ namespace TDDPractices
             {
                 var last = digits[i - 1];
                 var current = digits[i];
-                if (last!='h' && last!='w' && current != last)
+                if (!IsHorW(last) && current != last)
                 {
                     selected.Add(current);
                 }
 
-                if ((last == 'h' || last == 'w') && i > 2 && current != digits[i - 2])
+                if (IsHorW(last) && i > 2 && current != digits[i - 2])
                 {
                     selected.Add(current);
                 }
             }
             return Concat(selected);
+        }
+
+        private bool IsHorW(char letter)
+        {
+            return letter == 'h' || letter == 'w';
         }
     }
 }
