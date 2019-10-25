@@ -5,12 +5,28 @@ namespace TDDPractices.Tests
     [TestClass]
     public class SoundexTests
     {
+        private Soundex _soundex;
+
+        [TestInitialize]
+        public void Init()
+        {
+            _soundex = new Soundex();
+        }
+
         [TestMethod]
         public void ShouldRetainFirstLetter()
         {
-            var soundex = new Soundex();
-            var actual = soundex.Encode("A");
+            var actual = _soundex.Encode("A");
             Assert.AreEqual("A",actual);
+        }
+
+        [TestMethod]
+        public void ShouldPadWithZerosWhenLengthShorterThanFour()
+        {
+            var actual = _soundex.Encode("I");
+            Assert.AreEqual(4,actual.Length);
+            Assert.AreEqual("I000", actual);
+
         }
     }
 
