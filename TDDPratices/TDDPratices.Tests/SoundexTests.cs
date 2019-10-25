@@ -32,7 +32,7 @@ namespace TDDPractices.Tests
         public void ShouldUseDigitsInsteadOfConsonant()
         {
             var actual = _soundex.Encode("Ib");
-            Assert.AreEqual("A100",actual);
+            Assert.AreEqual("I100",actual);
         }
     }
 

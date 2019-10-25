@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TDDPractices
 {
@@ -14,7 +17,9 @@ namespace TDDPractices
             }
 
             var head = GetHead(word);
-            return PadWithZero(head);
+            var digits = ReplaceConsonantWithDigits(word.Substring(1));
+            var code = $"{head}{digits}";
+            return PadWithZero(code);
         }
 
         private string GetHead(string word)
@@ -27,6 +32,19 @@ namespace TDDPractices
             if (word.Length >= _maxCodeLength) return word;
             var zeros=new string('0',_maxCodeLength-word.Length);
             return String.Concat(word,zeros);
+        }
+
+        private IDictionary<char,int> _consonantDigitMap=new Dictionary<char, int>()
+        {
+            { 'b',1}
+        };
+
+        private string ReplaceConsonantWithDigits(string tails)
+        {
+            var digits = tails.Select(c => _consonantDigitMap[c])
+                .Select(i=>Convert.ToString(i))
+                .ToArray();
+            return string.Concat(digits);
         }
     }
 }
