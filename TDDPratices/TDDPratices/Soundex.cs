@@ -28,8 +28,8 @@ namespace TDDPractices
                 throw new ArgumentException("Word should not be null or empty");
             }
 
-            var head = GetHead(word);
-            var tails = GetTails(word);
+            var head = GetHeadWithHigherCase(word);
+            var tails = GetTailsWithLowerCase(word);
             
             var digits = ReplaceConsonantWithDigits(tails);
             var combinedDigits = CombineSameNeighborDigits(digits);
@@ -46,14 +46,14 @@ namespace TDDPractices
             return Concat(topThree);
         }
 
-        private string GetTails(string word)
+        private string GetTailsWithLowerCase(string word)
         {
-            return word.Substring(1);
+            return word.Substring(1).ToLower();
         }
 
-        private string GetHead(string word)
+        private string GetHeadWithHigherCase(string word)
         {
-            return word.Substring(0, 1);
+            return word.Substring(0, 1).ToUpper();
         }
 
         private string PadWithZero(string word)
