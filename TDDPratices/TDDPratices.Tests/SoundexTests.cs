@@ -74,7 +74,7 @@ namespace TDDPractices.Tests
         public void ShouldNotCombineSameDigitsWhenTheyAreSeperatedByY()
         {
             var actual = _soundex.Encode("Icyg");
-            Assert.AreEqual("I202", actual);
+            Assert.AreEqual("I220", actual);
         }
     }
 

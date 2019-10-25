@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using static System.String;
 
 namespace TDDPractices
@@ -29,10 +30,12 @@ namespace TDDPractices
 
             var head = GetHead(word);
             var tails = GetTails(word);
-            var tailsWithoutVowelLikeLetters = AbandonVowelLikeLetters(tails);
-            var digits = ReplaceConsonantWithDigits(tailsWithoutVowelLikeLetters);
+            
+            var digits = ReplaceConsonantWithDigits(tails);
             var combinedDigits = CombineSameNeighborDigits(digits);
-            var topThreeDigits = LimitDigitsLessThanThree(combinedDigits);
+            var digitsWithoutVowelLikeLetters = AbandonVowelLikeLetters(combinedDigits);
+            var topThreeDigits = LimitDigitsLessThanThree(digitsWithoutVowelLikeLetters);
+            
             var code = $"{head}{topThreeDigits}";
             return PadWithZero(code);
         }
@@ -70,20 +73,33 @@ namespace TDDPractices
         private string ReplaceConsonantWithDigits(string tails)
         {
             var digits = tails
-                .Select(c => _consonantDigitMap[c])
-                .Select(i => Convert.ToString(i));
+                .Select(c =>
+                {
+                    if (_consonantDigitMap.ContainsKey(c))
+                    {
+                        var intDigit = _consonantDigitMap[c];
+                        return Convert.ToString(intDigit);
+                    }
+                    return c.ToString();
+                });
             return Concat(digits);
         }
 
         private string CombineSameNeighborDigits(string digits)
         {
             var length = digits.Length;
+            if (string.IsNullOrEmpty(digits)) return string.Empty;
             var selected = new List<char> {digits[0]};
             for (var i = 1; i < length; i++)
             {
                 var last = digits[i - 1];
                 var current = digits[i];
-                if (current != last)
+                if (last!='h' && last!='w' && current != last)
+                {
+                    selected.Add(current);
+                }
+
+                if ((last == 'h' || last == 'w') && i > 2 && current != digits[i - 2])
                 {
                     selected.Add(current);
                 }
