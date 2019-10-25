@@ -17,6 +17,7 @@ namespace TDDPractices
             { 'm',5},{'n',5},
             { 'r',6}
         };
+        private readonly char[] VowelLikeLetters = new[] { 'a', 'e', 'i', 'o', 'u', 'y', 'h', 'w' };
 
         public string Encode(string word)
         {
@@ -27,7 +28,8 @@ namespace TDDPractices
 
             var head = GetHead(word);
             var tails = GetTails(word);
-            var digits = ReplaceConsonantWithDigits(tails);
+            var tailsWithoutVowelLikeLetters = AbandonVowelLikeLetters(tails);
+            var digits = ReplaceConsonantWithDigits(tailsWithoutVowelLikeLetters);
             var topThreeDigits = LimitDigitsLessThanThree(digits);
             var code = $"{head}{topThreeDigits}";
             return PadWithZero(code);
@@ -57,13 +59,17 @@ namespace TDDPractices
         }
 
 
+
+        private string AbandonVowelLikeLetters(string word)
+        {
+            return String.Concat(word.Where(c =>!VowelLikeLetters.Contains(c)));
+        }
+
         private string ReplaceConsonantWithDigits(string tails)
         {
             var digits = tails
-                .Where(c=>_consonantDigitMap.ContainsKey(c))
                 .Select(c => _consonantDigitMap[c])
-                .Select(i=>Convert.ToString(i))
-                .ToArray();
+                .Select(i => Convert.ToString(i));
             return string.Concat(digits);
         }
     }
