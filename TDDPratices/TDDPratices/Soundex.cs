@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using static System.String;
 
 namespace TDDPractices
 {
@@ -21,7 +22,7 @@ namespace TDDPractices
 
         public string Encode(string word)
         {
-            if (string.IsNullOrEmpty(word))
+            if (IsNullOrEmpty(word))
             {
                 throw new ArgumentException("Word should not be null or empty");
             }
@@ -39,7 +40,7 @@ namespace TDDPractices
         private string LimitDigitsLessThanThree(string digits)
         {
             var topThree = digits.Take(3);
-            return String.Concat(topThree);
+            return Concat(topThree);
         }
 
         private string GetTails(string word)
@@ -56,14 +57,14 @@ namespace TDDPractices
         {
             if (word.Length >= _maxCodeLength) return word;
             var zeros=new string('0',_maxCodeLength-word.Length);
-            return String.Concat(word,zeros);
+            return Concat(word,zeros);
         }
 
 
 
         private string AbandonVowelLikeLetters(string word)
         {
-            return String.Concat(word.Where(c =>!VowelLikeLetters.Contains(c)));
+            return Concat(word.Where(c =>!VowelLikeLetters.Contains(c)));
         }
 
         private string ReplaceConsonantWithDigits(string tails)
@@ -71,15 +72,14 @@ namespace TDDPractices
             var digits = tails
                 .Select(c => _consonantDigitMap[c])
                 .Select(i => Convert.ToString(i));
-            return string.Concat(digits);
+            return Concat(digits);
         }
 
         private string CombineSameNeighborDigits(string digits)
         {
             var length = digits.Length;
-            var selected = new List<char>();
-            selected.Add(digits[0]);
-            for (int i = 1; i < length; i++)
+            var selected = new List<char> {digits[0]};
+            for (var i = 1; i < length; i++)
             {
                 var last = digits[i - 1];
                 var current = digits[i];
@@ -88,7 +88,7 @@ namespace TDDPractices
                     selected.Add(current);
                 }
             }
-            return String.Concat(selected);
+            return Concat(selected);
         }
     }
 }
