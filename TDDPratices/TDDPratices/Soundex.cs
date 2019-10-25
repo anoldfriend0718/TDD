@@ -59,7 +59,9 @@ namespace TDDPractices
 
         private string ReplaceConsonantWithDigits(string tails)
         {
-            var digits = tails.Select(c => _consonantDigitMap[c])
+            var digits = tails
+                .Where(c=>_consonantDigitMap.ContainsKey(c))
+                .Select(c => _consonantDigitMap[c])
                 .Select(i=>Convert.ToString(i))
                 .ToArray();
             return string.Concat(digits);
