@@ -17,7 +17,7 @@ namespace TDDPractices.Tests
         public void ShouldRetainFirstLetter()
         {
             var actual = _soundex.Encode("A");
-            Assert.AreEqual("A",actual);
+            Assert.AreEqual("A000",actual);
         }
 
         [TestMethod]
