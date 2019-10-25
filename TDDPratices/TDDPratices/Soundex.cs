@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using static System.String;
 
 namespace TDDPractices
 {
     public static class Soundex
     {
-        private static readonly int _maxCodeLength=4;
-        private static readonly IDictionary<char, int> _consonantDigitMap = new Dictionary<char, int>()
+        private static readonly int MaxCodeLength=4;
+        private static readonly IDictionary<char, int> ConsonantDigitMap = new Dictionary<char, int>()
         {
             { 'b',1},{'f',1},{'p',1},{'v',1},
             { 'c',2},{'g',2},{'j',2},{'k',2},{'q',2},{'s',2},{'x',2},{'z',2},
@@ -36,8 +34,9 @@ namespace TDDPractices
                 .CombineSameNeighborDigits()
                 .AbandonVowelLikeLetters()
                 .LimitDigitsLessThanThree();
-            var code = $"{head}{digits}";
-            return PadWithZero(code);
+            var code = Concat(head,digits)
+                      .PadWithZero();
+            return code;
         }
 
         private static string LimitDigitsLessThanThree(this string digits)
@@ -58,8 +57,8 @@ namespace TDDPractices
 
         private static string PadWithZero(this string word)
         {
-            if (word.Length >= _maxCodeLength) return word;
-            var zeros=new string('0',_maxCodeLength-word.Length);
+            if (word.Length >= MaxCodeLength) return word;
+            var zeros=new string('0',MaxCodeLength-word.Length);
             return Concat(word,zeros);
         }
 
@@ -74,9 +73,9 @@ namespace TDDPractices
                 .Where(c=>Char.IsLetter(c))
                 .Select(c =>
                 {
-                    if (_consonantDigitMap.ContainsKey(c))
+                    if (ConsonantDigitMap.ContainsKey(c))
                     {
-                        var intDigit = _consonantDigitMap[c];
+                        var intDigit = ConsonantDigitMap[c];
                         return Convert.ToString(intDigit);
                     }
                     return c.ToString();
