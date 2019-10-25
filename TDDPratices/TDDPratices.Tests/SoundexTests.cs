@@ -83,6 +83,13 @@ namespace TDDPractices.Tests
             var actual = _soundex.Encode("Icag");
             Assert.AreEqual("I220", actual);
         }
+
+        [TestMethod]
+        public void ShouldIgnoreNonLetter()
+        {
+            var actual = _soundex.Encode("I#ag");
+            Assert.AreEqual("I200", actual);
+        }
     }
 
 

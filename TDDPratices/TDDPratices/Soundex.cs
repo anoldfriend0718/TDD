@@ -63,8 +63,6 @@ namespace TDDPractices
             return Concat(word,zeros);
         }
 
-
-
         private string AbandonVowelLikeLetters(string word)
         {
             return Concat(word.Where(c =>!VowelLikeLetters.Contains(c)));
