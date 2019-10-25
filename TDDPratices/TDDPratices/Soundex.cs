@@ -30,7 +30,8 @@ namespace TDDPractices
             var tails = GetTails(word);
             var tailsWithoutVowelLikeLetters = AbandonVowelLikeLetters(tails);
             var digits = ReplaceConsonantWithDigits(tailsWithoutVowelLikeLetters);
-            var topThreeDigits = LimitDigitsLessThanThree(digits);
+            var combinedDigits = CombineSameNeighborDigits(digits);
+            var topThreeDigits = LimitDigitsLessThanThree(combinedDigits);
             var code = $"{head}{topThreeDigits}";
             return PadWithZero(code);
         }
@@ -71,6 +72,23 @@ namespace TDDPractices
                 .Select(c => _consonantDigitMap[c])
                 .Select(i => Convert.ToString(i));
             return string.Concat(digits);
+        }
+
+        private string CombineSameNeighborDigits(string digits)
+        {
+            var length = digits.Length;
+            var selected = new List<char>();
+            selected.Add(digits[0]);
+            for (int i = 1; i < length; i++)
+            {
+                var last = digits[i - 1];
+                var current = digits[i];
+                if (current != last)
+                {
+                    selected.Add(current);
+                }
+            }
+            return String.Concat(selected);
         }
     }
 }
