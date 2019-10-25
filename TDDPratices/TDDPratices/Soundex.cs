@@ -97,6 +97,7 @@ namespace TDDPractices
                 if (!IsHorW(last) && current != last)
                 {
                     selected.Add(current);
+                    continue;
                 }
 
                 if (IsHorW(last) && i > 2 && current != digits[i - 2])

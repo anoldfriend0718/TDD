@@ -76,6 +76,13 @@ namespace TDDPractices.Tests
             var actual = _soundex.Encode("Icyg");
             Assert.AreEqual("I220", actual);
         }
+
+        [TestMethod]
+        public void ShouldNotCombineSameDigitsWhenTheyAreSeperatedByVowels()
+        {
+            var actual = _soundex.Encode("Icag");
+            Assert.AreEqual("I220", actual);
+        }
     }
 
 
