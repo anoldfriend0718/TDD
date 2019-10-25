@@ -41,6 +41,13 @@ namespace TDDPractices.Tests
             var actual = _soundex.Encode("Ibcm");
             Assert.AreEqual("I125", actual);
         }
+
+        [TestMethod]
+        public void ShouldLimitDigitLessThanThree()
+        {
+            var actual = _soundex.Encode("Ibcmr");
+            Assert.AreEqual("I125", actual);
+        }
     }
 
 

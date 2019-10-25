@@ -28,8 +28,15 @@ namespace TDDPractices
             var head = GetHead(word);
             var tails = GetTails(word);
             var digits = ReplaceConsonantWithDigits(tails);
-            var code = $"{head}{digits}";
+            var topThreeDigits = LimitDigitsLessThanThree(digits);
+            var code = $"{head}{topThreeDigits}";
             return PadWithZero(code);
+        }
+
+        private string LimitDigitsLessThanThree(string digits)
+        {
+            var topThree = digits.Take(3);
+            return String.Concat(topThree);
         }
 
         private string GetTails(string word)
