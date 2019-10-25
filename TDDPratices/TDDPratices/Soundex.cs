@@ -17,9 +17,15 @@ namespace TDDPractices
             }
 
             var head = GetHead(word);
-            var digits = ReplaceConsonantWithDigits(word.Substring(1));
+            var tails = GetTails(word);
+            var digits = ReplaceConsonantWithDigits(tails);
             var code = $"{head}{digits}";
             return PadWithZero(code);
+        }
+
+        private string GetTails(string word)
+        {
+            return word.Substring(1);
         }
 
         private string GetHead(string word)
@@ -34,7 +40,7 @@ namespace TDDPractices
             return String.Concat(word,zeros);
         }
 
-        private IDictionary<char,int> _consonantDigitMap=new Dictionary<char, int>()
+        private readonly IDictionary<char,int> _consonantDigitMap=new Dictionary<char, int>()
         {
             { 'b',1}
         };
