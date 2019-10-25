@@ -7,10 +7,10 @@ using static System.String;
 
 namespace TDDPractices
 {
-    public class Soundex
+    public static class Soundex
     {
-        private readonly int _maxCodeLength=4;
-        private readonly IDictionary<char, int> _consonantDigitMap = new Dictionary<char, int>()
+        private static readonly int _maxCodeLength=4;
+        private static readonly IDictionary<char, int> _consonantDigitMap = new Dictionary<char, int>()
         {
             { 'b',1},{'f',1},{'p',1},{'v',1},
             { 'c',2},{'g',2},{'j',2},{'k',2},{'q',2},{'s',2},{'x',2},{'z',2},
@@ -19,56 +19,56 @@ namespace TDDPractices
             { 'm',5},{'n',5},
             { 'r',6}
         };
-        private readonly char[] VowelLikeLetters = new[] { 'a', 'e', 'i', 'o', 'u', 'y', 'h', 'w' };
+        private static readonly char[] VowelLikeLetters = new[] { 'a', 'e', 'i', 'o', 'u', 'y', 'h', 'w' };
 
-        public string Encode(string word)
+        public static string Encode(string word)
         {
             if (IsNullOrEmpty(word))
             {
                 throw new ArgumentException("Word should not be null or empty");
             }
 
-            var head = GetHeadWithHigherCase(word);
-            var tails = GetTailsWithLowerCase(word);
-            
-            var digits = ReplaceConsonantWithDigits(tails);
-            var combinedDigits = CombineSameNeighborDigits(digits);
-            var digitsWithoutVowelLikeLetters = AbandonVowelLikeLetters(combinedDigits);
-            var topThreeDigits = LimitDigitsLessThanThree(digitsWithoutVowelLikeLetters);
-            
-            var code = $"{head}{topThreeDigits}";
+            var head = word
+                .GetHeadWithHigherCase();
+            var digits = word
+                .GetTailsWithLowerCase()
+                .ReplaceConsonantWithDigits()
+                .CombineSameNeighborDigits()
+                .AbandonVowelLikeLetters()
+                .LimitDigitsLessThanThree();
+            var code = $"{head}{digits}";
             return PadWithZero(code);
         }
 
-        private string LimitDigitsLessThanThree(string digits)
+        private static string LimitDigitsLessThanThree(this string digits)
         {
             var topThree = digits.Take(3);
             return Concat(topThree);
         }
 
-        private string GetTailsWithLowerCase(string word)
+        private static string GetTailsWithLowerCase(this string word)
         {
             return word.Substring(1).ToLower();
         }
 
-        private string GetHeadWithHigherCase(string word)
+        private static string GetHeadWithHigherCase(this string word)
         {
             return word.Substring(0, 1).ToUpper();
         }
 
-        private string PadWithZero(string word)
+        private static string PadWithZero(this string word)
         {
             if (word.Length >= _maxCodeLength) return word;
             var zeros=new string('0',_maxCodeLength-word.Length);
             return Concat(word,zeros);
         }
 
-        private string AbandonVowelLikeLetters(string word)
+        private static string AbandonVowelLikeLetters(this string word)
         {
             return Concat(word.Where(c =>!VowelLikeLetters.Contains(c)));
         }
 
-        private string ReplaceConsonantWithDigits(string tails)
+        private static string ReplaceConsonantWithDigits(this string tails)
         {
             var digits = tails
                 .Where(c=>Char.IsLetter(c))
@@ -84,7 +84,7 @@ namespace TDDPractices
             return Concat(digits);
         }
 
-        private string CombineSameNeighborDigits(string digits)
+        private static string CombineSameNeighborDigits(this string digits)
         {
             var length = digits.Length;
             if (string.IsNullOrEmpty(digits)) return string.Empty;
@@ -107,7 +107,7 @@ namespace TDDPractices
             return Concat(selected);
         }
 
-        private bool IsHorW(char letter)
+        private static bool IsHorW(char letter)
         {
             return letter == 'h' || letter == 'w';
         }
