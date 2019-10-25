@@ -34,6 +34,13 @@ namespace TDDPractices.Tests
             var actual = _soundex.Encode("Ib");
             Assert.AreEqual("I100",actual);
         }
+
+        [TestMethod]
+        public void ShouldReplaceMultipleConsonantWithDigits()
+        {
+            var actual = _soundex.Encode("Ibcm");
+            Assert.AreEqual("I125", actual);
+        }
     }
 
 
