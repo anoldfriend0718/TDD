@@ -55,6 +55,13 @@ namespace TDDPractices.Tests
             var actual = _soundex.Encode("Iaem");
             Assert.AreEqual("I500",actual);
         }
+
+        [TestMethod]
+        public void ShouldCombineNeighborDigitsWhenTheyAreSame()
+        {
+            var actual = _soundex.Encode("Icgb");
+            Assert.AreEqual("I210",actual);
+        }
     }
 
 
