@@ -57,7 +57,6 @@ namespace TDDPractices
         }
 
 
-
         private string ReplaceConsonantWithDigits(string tails)
         {
             var digits = tails.Select(c => _consonantDigitMap[c])

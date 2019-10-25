@@ -48,6 +48,13 @@ namespace TDDPractices.Tests
             var actual = _soundex.Encode("Ibcmr");
             Assert.AreEqual("I125", actual);
         }
+
+        [TestMethod]
+        public void ShouldAbandonVowelLikeLetters()
+        {
+            var actual = _soundex.Encode("Iaem");
+            Assert.AreEqual("I500",actual);
+        }
     }
 
 
