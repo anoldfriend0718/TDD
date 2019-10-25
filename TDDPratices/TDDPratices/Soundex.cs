@@ -71,6 +71,7 @@ namespace TDDPractices
         private string ReplaceConsonantWithDigits(string tails)
         {
             var digits = tails
+                .Where(c=>Char.IsLetter(c))
                 .Select(c =>
                 {
                     if (_consonantDigitMap.ContainsKey(c))
